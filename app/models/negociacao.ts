@@ -1,31 +1,23 @@
 export class Negociacao{
 
-    //propriedades privadas dessa classe
-    private _data: Date;
-    private _quantidade: number;
-    private _valor: number;
+    
 
-    constructor(data: Date, quantidade: number, valor: number){
-        this._data = data;
-        this._quantidade = quantidade;
-        this._valor = valor; 
+    constructor(
+        private readonly _data: Date,
+        public readonly quantidade: number, 
+        public readonly valor: number)
+    {}
+    // Se explicitar private ou public no construtor da minha classe, isso indica pro TS
+    //que por debaixo dos panos ele cria uma propriedade da minha classe que tenha o mesmo nome do meu parametro do construtor
+
+    get volume(): number{
+        return this.quantidade * this.valor;
     }
 
     get data(): Date{
-        return this._data;
-    }
+        const data = new Date(this._data.getTime());
 
-    get quantidade(): number{
-        return this._quantidade;
+        return data;
     }
-
-    get valor(): number{
-        return this._valor;
-    }
-
-    get volume(): number{
-        return this._quantidade * this._valor;
-    }
-
 
 }
