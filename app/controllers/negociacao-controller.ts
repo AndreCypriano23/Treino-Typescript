@@ -1,3 +1,4 @@
+import { DiasDaSemana } from "../enums/dias-da-semana.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { MensagemView } from "../views/mensagem-view.js";
@@ -12,6 +13,10 @@ export class NegociacaoController{
     private negociacoes: Negociacoes = new Negociacoes();
     private negociacoesView = new NegociacoesView('#negociacoesView');
     private mensagemView = new MensagemView('#mensagemView');
+    private readonly DOMINGO = 0;
+    private readonly SABADO = 6;
+   
+
 
     constructor(){
         //Vou no DOM e pego esses elementos e atribuo a essas propriedades do construtor da minha classe
@@ -24,17 +29,21 @@ export class NegociacaoController{
     public adiciona(): void{
         const negociacao = this.criaNegociacao();
 
-        // 0 - 6 Dias da semana vao de 0 a 6, sendo 0 domingo e 6 sábado
-        if(negociacao.data.getDay() > 0 && negociacao.data.getDay() < 6 ){//Negociações não podem ser feitas sábado ou domingo
-            this.negociacoes.adiciona(negociacao);
-            //const negociacoes = this.negociacoes.lista();
-            //console.log(negociacoes);
-            this.limparFormulario();
-            this.atualizaView();
-        }else{
-            this.mensagemView.update('Apenas negociações em dias úteis são aceitas');
+        if(!this.ehDiaUtil(negociacao.data)){
+            this.mensagemView.update('Apenas negociacoes em dias úteis são aceitas');
+            return ;
         }
-      
+
+        this.negociacoes.adiciona(negociacao);
+        //const negociacoes = this.negociacoes.lista();
+        //console.log(negociacoes);
+        this.limparFormulario();
+        this.atualizaView();
+       
+    }
+
+    private ehDiaUtil(date: Date){
+        return date.getDay() > DiasDaSemana.DOMINGO && date.getDay() < DiasDaSemana.SABADO;  
     }
 
     private criaNegociacao(): Negociacao {
@@ -58,6 +67,7 @@ export class NegociacaoController{
 
     private atualizaView(): void{
 
+         // 0 - 6 Dias da semana vao de 0 a 6, sendo 0 domingo e 6 sábado
         this.negociacoesView.update(this.negociacoes);
         this.mensagemView.update('Negociação adicionada com sucesso!');
 
