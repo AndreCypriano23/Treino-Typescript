@@ -17,12 +17,11 @@ export class NegociacaoController{
     private readonly SABADO = 6;
    
 
-
     constructor(){
         //Vou no DOM e pego esses elementos e atribuo a essas propriedades do construtor da minha classe
-        this.inputData = document.querySelector('#data');
-        this.inputQuantidade = document.querySelector('#quantidade');
-        this.inputValor = document.querySelector('#valor');
+        this.inputData = document.querySelector('#data') as HTMLInputElement; //com o as eu garanto que o tipo retornado vai ser HTMLImplementElement Casting explícito
+        this.inputQuantidade = document.querySelector('#quantidade') as HTMLInputElement;
+        this.inputValor = document.querySelector('#valor') as HTMLInputElement;
         this.negociacoesView.update(this.negociacoes);
     } 
 

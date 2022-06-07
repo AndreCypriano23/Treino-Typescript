@@ -10,7 +10,6 @@ export class NegociacaoController {
         this.mensagemView = new MensagemView('#mensagemView');
         this.DOMINGO = 0;
         this.SABADO = 6;
-        //Vou no DOM e pego esses elementos e atribuo a essas propriedades do construtor da minha classe
         this.inputData = document.querySelector('#data');
         this.inputQuantidade = document.querySelector('#quantidade');
         this.inputValor = document.querySelector('#valor');
@@ -23,8 +22,6 @@ export class NegociacaoController {
             return;
         }
         this.negociacoes.adiciona(negociacao);
-        //const negociacoes = this.negociacoes.lista();
-        //console.log(negociacoes);
         this.limparFormulario();
         this.atualizaView();
     }
@@ -38,7 +35,6 @@ export class NegociacaoController {
         this.inputData.focus();
     }
     atualizaView() {
-        // 0 - 6 Dias da semana vao de 0 a 6, sendo 0 domingo e 6 sábado
         this.negociacoesView.update(this.negociacoes);
         this.mensagemView.update('Negociação adicionada com sucesso!');
     }

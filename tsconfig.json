@@ -3,7 +3,9 @@
         "outDir": "dist/js",
         "target": "ES6",
         "noEmitOnError": true,//nao vai gerar arquivo JS então não estiver tudo OK na compilação
-        "noImplicitAny": true
+        "noImplicitAny": true,
+        "removeComments": true,
+        "strictNullChecks": true
     },
     "include": [
         "app/**/*"
