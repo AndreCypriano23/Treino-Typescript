@@ -17,4 +17,13 @@ export class Negociacao{
         return data;
     }
 
+    public static criaDe(dateString: string, quantidadeString: string, valorString: string): Negociacao {
+        const exp = /-/g; //Expressão regular
+        const date = new Date(dateString.replace(exp, ','));//procura todo mundo que tem - e substitui por ,
+        const quantidade = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+        return new Negociacao(date, quantidade, valor);
+
+    }
+
 }

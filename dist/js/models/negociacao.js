@@ -13,4 +13,11 @@ export class Negociacao {
         const data = new Date(this._data.getTime());
         return data;
     }
+    static criaDe(dateString, quantidadeString, valorString) {
+        const exp = /-/g; //Expressão regular
+        const date = new Date(dateString.replace(exp, ',')); //procura todo mundo que tem - e substitui por ,
+        const quantidade = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+        return new Negociacao(date, quantidade, valor);
+    }
 }
